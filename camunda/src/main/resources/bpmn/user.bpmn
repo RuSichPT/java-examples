@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1nvx8u3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.18.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0">
+  <bpmn:process id="user-process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0tgd5c8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0tgd5c8" sourceRef="StartEvent_1" targetRef="Activity_19hjktg" />
+    <bpmn:serviceTask id="Activity_0eyfl34" name="Логирование">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="user.log" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12x7gbp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1orpttr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1uskztc">
+      <bpmn:incoming>Flow_1tfrrvu</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_16iv5aq" name="Посчитать зарплату">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="user.calculateSalary" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=salary" target="salary" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1orpttr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tfrrvu</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1tfrrvu" sourceRef="Activity_16iv5aq" targetRef="Event_1uskztc" />
+    <bpmn:exclusiveGateway id="Gateway_0phhf32" default="Flow_12x7gbp">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_04z22tb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l6u94j</bpmn:outgoing>
+      <bpmn:outgoing>Flow_12x7gbp</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1orpttr" sourceRef="Activity_0eyfl34" targetRef="Activity_16iv5aq" />
+    <bpmn:endEvent id="Event_0pp40jo" name="Нет такого пользователя">
+      <bpmn:incoming>Flow_0l6u94j</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0l6u94j" sourceRef="Gateway_0phhf32" targetRef="Event_0pp40jo">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=user = null</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_04z22tb" sourceRef="Activity_19hjktg" targetRef="Gateway_0phhf32" />
+    <bpmn:serviceTask id="Activity_19hjktg" name="Есть такой пользователь?">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="user.find" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=user" target="user" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0tgd5c8</bpmn:incoming>
+      <bpmn:outgoing>Flow_04z22tb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_12x7gbp" sourceRef="Gateway_0phhf32" targetRef="Activity_0eyfl34" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="user-process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18gm545_di" bpmnElement="Activity_0eyfl34">
+        <dc:Bounds x="490" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1uskztc_di" bpmnElement="Event_1uskztc">
+        <dc:Bounds x="832" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0n8vyo5_di" bpmnElement="Activity_16iv5aq">
+        <dc:Bounds x="660" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0phhf32_di" bpmnElement="Gateway_0phhf32" isMarkerVisible="true">
+        <dc:Bounds x="375" y="92" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="252" y="55" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0pp40jo_di" bpmnElement="Event_0pp40jo">
+        <dc:Bounds x="382" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="366" y="255" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06xwj3y_di" bpmnElement="Activity_19hjktg">
+        <dc:Bounds x="230" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0tgd5c8_di" bpmnElement="Flow_0tgd5c8">
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="230" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tfrrvu_di" bpmnElement="Flow_1tfrrvu">
+        <di:waypoint x="760" y="117" />
+        <di:waypoint x="832" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1orpttr_di" bpmnElement="Flow_1orpttr">
+        <di:waypoint x="590" y="117" />
+        <di:waypoint x="660" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l6u94j_di" bpmnElement="Flow_0l6u94j">
+        <di:waypoint x="400" y="142" />
+        <di:waypoint x="400" y="212" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04z22tb_di" bpmnElement="Flow_04z22tb">
+        <di:waypoint x="330" y="117" />
+        <di:waypoint x="375" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12x7gbp_di" bpmnElement="Flow_12x7gbp">
+        <di:waypoint x="425" y="117" />
+        <di:waypoint x="490" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
