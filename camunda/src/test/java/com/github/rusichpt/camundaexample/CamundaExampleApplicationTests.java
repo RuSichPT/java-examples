@@ -1,14 +1,15 @@
 package com.github.rusichpt.camundaexample;
 
+import com.github.rusichpt.camundaexample.common.ResultCaptor;
 import com.github.rusichpt.camundaexample.dto.User;
 import com.github.rusichpt.camundaexample.repo.UserRepository;
+import com.github.rusichpt.camundaexample.worker.UserWorker;
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import io.camunda.zeebe.spring.client.annotation.value.ZeebeWorkerValue;
 import io.camunda.zeebe.spring.client.bean.MethodInfo;
 import io.camunda.zeebe.spring.client.jobhandling.JobWorkerManager;
 import io.zeebe.containers.ZeebeContainer;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -16,6 +17,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -31,10 +33,13 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 import static com.github.rusichpt.camundaexample.CamundaExampleApplicationTests.Configuration;
 import static com.github.rusichpt.camundaexample.common.ZeebeClientUtils.createProcess;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
@@ -58,6 +63,8 @@ class CamundaExampleApplicationTests {
     private UserRepository repo;
     @Autowired
     private EasyRandom random;
+    @SpyBean
+    private UserWorker worker;
 
     @Container
     private static final ZeebeContainer ZEEBE_CONTAINER = new ZeebeContainer();
@@ -69,8 +76,7 @@ class CamundaExampleApplicationTests {
     }
 
     @Test
-    @DisplayName("UserWorker (все) должны отработать корректно")
-    @SneakyThrows
+    @DisplayName("UserWorker (все) должны отработать корректно через Аспекты")
     void test1() {
         Long id = 1L;
         Map<String, Object> vars = Map.of("id", id);
@@ -90,7 +96,7 @@ class CamundaExampleApplicationTests {
         // ожидаем завершения работы worker'ов
         Awaitility.await()
                 .atMost(3, TimeUnit.SECONDS)
-                .until(() -> findWorker.done() && logWorker.done() && salaryWorker.done());
+                .until(() -> findWorker.isDone() && logWorker.isDone() && salaryWorker.isDone());
 
         assertThat(findWorker.getResult())
                 .isNotEmpty()
@@ -114,7 +120,7 @@ class CamundaExampleApplicationTests {
         // ожидаем завершения работы worker'ов
         Awaitility.await()
                 .atMost(3, TimeUnit.SECONDS)
-                .until(() -> findWorker.done());
+                .until(() -> findWorker.isDone());
 
         assertThat(findWorker.getResult())
                 .isNotEmpty();
@@ -124,7 +130,51 @@ class CamundaExampleApplicationTests {
         workerManager.closeAllOpenWorkers();
     }
 
+    @Test
+    @DisplayName("UserWorker (все) должны отработать корректно через SpyBean")
+    void test3() {
+        Long id = 1L;
+        Map<String, Object> vars = Map.of("id", id);
+        User expected = repo.getUser(id);
+
+        // Находим worker'ы и заново их запускаем, потому что закрыли в предыдущем тесте
+        Consumer<ZeebeWorkerValue> consumer = (z) -> workerManager.openWorker(client, z);
+        workerManager.findJobWorkerConfigByType("user.log").ifPresent(consumer);
+        workerManager.findJobWorkerConfigByType("user.find").ifPresent(consumer);
+        workerManager.findJobWorkerConfigByType("user.calculateSalary").ifPresent(consumer);
+
+        // Создаем ResultCaptor для каждого worker'a
+        ResultCaptor<Map<String, User>> resultFind = new ResultCaptor<>();
+        ResultCaptor<Map<String, Double>> resultCalcSalary = new ResultCaptor<>();
+        ResultCaptor<Void> resultLog = new ResultCaptor<>();
+        doAnswer(resultCalcSalary).when(worker).calculateSalary(any(User.class));
+        doAnswer(resultFind).when(worker).findUser(any(Long.class));
+        doAnswer(resultLog).when(worker).logUser(any(User.class));
+
+        // Создать экземпляр процесса, начиная с шага Activity_19hjktg"
+        ProcessInstanceEvent event = createProcess(client, "user-process", "Activity_19hjktg", vars);
+
+        // Ожидаем завершения работы worker'ов
+        Awaitility.await()
+                .atMost(3, TimeUnit.SECONDS)
+                .until(() -> resultFind.isDone() && resultCalcSalary.isDone() && resultLog.isDone());
+
+        assertThat(resultFind.getResult())
+                .isNotEmpty()
+                .isEqualTo(Map.of("user", expected));
+        assertThat(resultCalcSalary.getResult())
+                .isNotEmpty()
+                .isEqualTo(Map.of("salary", expected.getSalary()));
+
+        Mockito.verify(worker).calculateSalary(any(User.class));
+        Mockito.verify(worker).logUser(any(User.class));
+        Mockito.verify(worker).findUser(id);
+
+        workerManager.closeAllOpenWorkers();
+    }
+
     /**
+     * Для spring boot 2.x.x
      * <p>
      * Аспект используется для проверки результата работы {@link com.github.rusichpt.camundaexample.worker.UserWorker},
      * который инициализируется декларативно {@link io.camunda.zeebe.spring.client.annotation.JobWorker}
@@ -147,7 +197,7 @@ class CamundaExampleApplicationTests {
             return Optional.ofNullable(result.get());
         }
 
-        public boolean done() {
+        public boolean isDone() {
             return Optional.ofNullable(result.get()).isPresent();
         }
 
@@ -167,7 +217,7 @@ class CamundaExampleApplicationTests {
             return Optional.ofNullable(result.get());
         }
 
-        public boolean done() {
+        public boolean isDone() {
             return Optional.ofNullable(result.get()).isPresent();
         }
 
@@ -183,7 +233,7 @@ class CamundaExampleApplicationTests {
     public static class LogUserWorkerInterceptor {
         private final AtomicBoolean result = new AtomicBoolean(false);
 
-        public boolean done() {
+        public boolean isDone() {
             return result.get();
         }
 
@@ -215,4 +265,6 @@ class CamundaExampleApplicationTests {
             return new EasyRandom();
         }
     }
+
+
 }
