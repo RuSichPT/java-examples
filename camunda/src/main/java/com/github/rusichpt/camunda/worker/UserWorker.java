@@ -1,7 +1,7 @@
-package com.github.rusichpt.camundaexample.worker;
+package com.github.rusichpt.camunda.worker;
 
-import com.github.rusichpt.camundaexample.dto.User;
-import com.github.rusichpt.camundaexample.service.UserService;
+import com.github.rusichpt.camunda.dto.User;
+import com.github.rusichpt.camunda.service.UserService;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.annotation.Variable;
 import lombok.RequiredArgsConstructor;

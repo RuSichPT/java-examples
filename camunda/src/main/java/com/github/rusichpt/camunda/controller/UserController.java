@@ -1,7 +1,7 @@
-package com.github.rusichpt.camundaexample.controller;
+package com.github.rusichpt.camunda.controller;
 
-import com.github.rusichpt.camundaexample.dto.User;
-import com.github.rusichpt.camundaexample.service.UserService;
+import com.github.rusichpt.camunda.dto.User;
+import com.github.rusichpt.camunda.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

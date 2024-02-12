@@ -1,6 +1,6 @@
-package com.github.rusichpt.camundaexample.controller;
+package com.github.rusichpt.camunda.controller;
 
-import com.github.rusichpt.camundaexample.service.ProcessService;
+import com.github.rusichpt.camunda.service.ProcessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

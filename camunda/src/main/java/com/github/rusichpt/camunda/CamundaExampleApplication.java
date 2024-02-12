@@ -1,4 +1,4 @@
-package com.github.rusichpt.camundaexample;
+package com.github.rusichpt.camunda;
 
 import io.camunda.zeebe.spring.client.annotation.Deployment;
 import org.springframework.boot.SpringApplication;

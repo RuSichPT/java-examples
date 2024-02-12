@@ -1,4 +1,4 @@
-package com.github.rusichpt.camundaexample.dto;
+package com.github.rusichpt.camunda.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

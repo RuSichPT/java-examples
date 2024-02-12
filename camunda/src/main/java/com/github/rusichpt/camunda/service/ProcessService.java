@@ -1,4 +1,4 @@
-package com.github.rusichpt.camundaexample.service;
+package com.github.rusichpt.camunda.service;
 
 import io.camunda.zeebe.client.ZeebeClient;
 import lombok.RequiredArgsConstructor;

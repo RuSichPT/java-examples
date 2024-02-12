@@ -1,9 +1,9 @@
-package com.github.rusichpt.camundaexample;
+package com.github.rusichpt.camunda;
 
-import com.github.rusichpt.camundaexample.common.ResultCaptor;
-import com.github.rusichpt.camundaexample.dto.User;
-import com.github.rusichpt.camundaexample.repo.UserRepository;
-import com.github.rusichpt.camundaexample.worker.UserWorker;
+import com.github.rusichpt.camunda.common.ResultCaptor;
+import com.github.rusichpt.camunda.dto.User;
+import com.github.rusichpt.camunda.repo.UserRepository;
+import com.github.rusichpt.camunda.worker.UserWorker;
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import io.camunda.zeebe.spring.client.annotation.value.ZeebeWorkerValue;
@@ -35,8 +35,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
-import static com.github.rusichpt.camundaexample.CamundaExampleApplicationTests.Configuration;
-import static com.github.rusichpt.camundaexample.common.ZeebeClientUtils.createProcess;
+import static com.github.rusichpt.camunda.CamundaExampleApplicationTests.Configuration;
+import static com.github.rusichpt.camunda.common.ZeebeClientUtils.createProcess;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
@@ -176,7 +176,7 @@ class CamundaExampleApplicationTests {
     /**
      * Для spring boot 2.x.x
      * <p>
-     * Аспект используется для проверки результата работы {@link com.github.rusichpt.camundaexample.worker.UserWorker},
+     * Аспект используется для проверки результата работы {@link com.github.rusichpt.camunda.worker.UserWorker},
      * который инициализируется декларативно {@link io.camunda.zeebe.spring.client.annotation.JobWorker}
      * </p>
      * <p>
@@ -201,7 +201,7 @@ class CamundaExampleApplicationTests {
             return Optional.ofNullable(result.get()).isPresent();
         }
 
-        @AfterReturning(value = "execution(* com.github.rusichpt.camundaexample.worker.UserWorker.findUser(..))",
+        @AfterReturning(value = "execution(* com.github.rusichpt.camunda.worker.UserWorker.findUser(..))",
                 returning = "result")
         public void afterReturningCreateCheckResponse(JoinPoint jp, Object result) {
             @SuppressWarnings("unchecked") Map<String, User> responseMap = (Map<String, User>) result;
@@ -221,7 +221,7 @@ class CamundaExampleApplicationTests {
             return Optional.ofNullable(result.get()).isPresent();
         }
 
-        @AfterReturning(value = "execution(* com.github.rusichpt.camundaexample.worker.UserWorker.calculateSalary(..))",
+        @AfterReturning(value = "execution(* com.github.rusichpt.camunda.worker.UserWorker.calculateSalary(..))",
                 returning = "result")
         public void afterReturningCreateCheckResponse(JoinPoint jp, Object result) {
             @SuppressWarnings("unchecked") Map<String, Double> responseMap = (Map<String, Double>) result;
@@ -237,7 +237,7 @@ class CamundaExampleApplicationTests {
             return result.get();
         }
 
-        @AfterReturning(value = "execution(* com.github.rusichpt.camundaexample.worker.UserWorker.logUser(..))",
+        @AfterReturning(value = "execution(* com.github.rusichpt.camunda.worker.UserWorker.logUser(..))",
                 returning = "result")
         public void afterReturningCreateCheckResponse(JoinPoint jp, Object result) {
             this.result.set(true);

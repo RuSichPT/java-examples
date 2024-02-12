@@ -1,4 +1,4 @@
-package com.github.rusichpt.camundaexample.common;
+package com.github.rusichpt.camunda.common;
 
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.DeploymentEvent;

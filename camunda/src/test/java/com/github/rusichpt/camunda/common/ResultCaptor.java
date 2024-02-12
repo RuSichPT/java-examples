@@ -1,4 +1,4 @@
-package com.github.rusichpt.camundaexample.common;
+package com.github.rusichpt.camunda.common;
 
 import lombok.Getter;
 import org.mockito.invocation.InvocationOnMock;

@@ -1,6 +1,6 @@
-package com.github.rusichpt.camundaexample.repo;
+package com.github.rusichpt.camunda.repo;
 
-import com.github.rusichpt.camundaexample.dto.User;
+import com.github.rusichpt.camunda.dto.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
