@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserRepository {
@@ -18,11 +19,11 @@ public class UserRepository {
         users.put(2L, new User("Андрей", 21, 1500.0));
     }
 
-    public User getUser(Long id) {
-        return users.get(id);
+    public Optional<User> findById(Long id) {
+        return Optional.ofNullable(users.get(id));
     }
 
-    public List<User> getUsers() {
+    public List<User> findAll() {
         return new ArrayList<>(users.values());
     }
 }

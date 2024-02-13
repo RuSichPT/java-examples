@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class UserWorker {
 
     @JobWorker(type = "user.find")
     public Map<String, User> findUser(@Variable Long id) {
-        User user = userService.getUser(id);
+        User user = userService.getUser(id).orElse(null);
         log.info("Find user: {}", user);
         Map<String, User> vars = new HashMap<>();
         vars.put("user", user);

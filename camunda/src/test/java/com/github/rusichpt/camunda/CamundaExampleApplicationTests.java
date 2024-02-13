@@ -80,7 +80,7 @@ class CamundaExampleApplicationTests {
     void test1() {
         Long id = 1L;
         Map<String, Object> vars = Map.of("id", id);
-        User expected = repo.getUser(id);
+        User expected = repo.findById(id).orElseThrow();
 
         // Создать экземпляр процесса, начиная с шага Activity_19hjktg"
         ProcessInstanceEvent event = createProcess(client, "user-process", "Activity_19hjktg", vars);
@@ -135,7 +135,7 @@ class CamundaExampleApplicationTests {
     void test3() {
         Long id = 1L;
         Map<String, Object> vars = Map.of("id", id);
-        User expected = repo.getUser(id);
+        User expected = repo.findById(id).orElseThrow();
 
         // Находим worker'ы и заново их запускаем, потому что закрыли в предыдущем тесте
         Consumer<ZeebeWorkerValue> consumer = (z) -> workerManager.openWorker(client, z);

@@ -8,42 +8,42 @@
         <version>3.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.github.rusichpt</groupId>
-    <artifactId>camunda</artifactId>
+    <groupId>com.gitgub.rusichpt</groupId>
+    <artifactId>data</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>camunda</name>
+    <name>data</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>17</java.version>
-        <camunda.version>8.4.0</camunda.version>
-        <zeebe-test-container.version>3.6.3</zeebe-test-container.version>
-        <easy-random.version>5.0.0</easy-random.version>
-        <aspectj.version>1.9.21</aspectj.version>
         <openapi.version>2.2.0</openapi.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.camunda.spring</groupId>
-            <artifactId>spring-boot-starter-camunda</artifactId>
-            <version>${camunda.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${openapi.version}</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${openapi.version}</version>
+        </dependency>
 
-        <!--Testing-->
+        <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -60,24 +60,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.zeebe</groupId>
-            <artifactId>zeebe-test-container</artifactId>
-            <version>${zeebe-test-container.version}</version>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jeasy</groupId>
-            <artifactId>easy-random-core</artifactId>
-            <version>${easy-random.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>

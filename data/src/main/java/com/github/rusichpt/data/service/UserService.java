@@ -1,7 +1,7 @@
-package com.github.rusichpt.camunda.service;
+package com.github.rusichpt.data.service;
 
 
-import com.github.rusichpt.camunda.dto.User;
+import com.github.rusichpt.data.entity.User;
 
 import java.util.List;
 import java.util.Optional;

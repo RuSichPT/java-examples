@@ -11,6 +11,7 @@
 
     <modules>
         <module>camunda</module>
+        <module>data</module>
     </modules>
 
 

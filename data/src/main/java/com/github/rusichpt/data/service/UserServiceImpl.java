@@ -1,8 +1,8 @@
-package com.github.rusichpt.camunda.service;
+package com.github.rusichpt.data.service;
 
 
-import com.github.rusichpt.camunda.dto.User;
-import com.github.rusichpt.camunda.repo.UserRepository;
+import com.github.rusichpt.data.entity.User;
+import com.github.rusichpt.data.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
