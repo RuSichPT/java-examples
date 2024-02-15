@@ -15,6 +15,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.jeasy.random.EasyRandom;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,7 +34,6 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
 
 import static com.github.rusichpt.camunda.CamundaExampleApplicationTests.Configuration;
 import static com.github.rusichpt.camunda.common.ZeebeClientUtils.createProcess;
@@ -75,6 +75,11 @@ class CamundaExampleApplicationTests {
         registry.add("zeebe.client.broker.gateway-address", ZEEBE_CONTAINER::getExternalGatewayAddress);
     }
 
+    @AfterAll
+    static void closeOpenWorkers(@Autowired JobWorkerManager workerManager) {
+        workerManager.closeAllOpenWorkers();
+    }
+
     @Test
     @DisplayName("UserWorker (все) должны отработать корректно через Аспекты")
     void test1() {
@@ -104,8 +109,6 @@ class CamundaExampleApplicationTests {
         assertThat(salaryWorker.getResult())
                 .isNotEmpty()
                 .hasValue(Map.of("salary", expected.getSalary()));
-
-        workerManager.closeAllOpenWorkers();
     }
 
     @Test
@@ -126,8 +129,6 @@ class CamundaExampleApplicationTests {
                 .isNotEmpty();
         assertThat(findWorker.getResult().get().get("user"))
                 .isNull();
-
-        workerManager.closeAllOpenWorkers();
     }
 
     @Test
@@ -136,12 +137,6 @@ class CamundaExampleApplicationTests {
         Long id = 1L;
         Map<String, Object> vars = Map.of("id", id);
         User expected = repo.findById(id).orElseThrow();
-
-        // Находим worker'ы и заново их запускаем, потому что закрыли в предыдущем тесте
-        Consumer<ZeebeWorkerValue> consumer = (z) -> workerManager.openWorker(client, z);
-        workerManager.findJobWorkerConfigByType("user.log").ifPresent(consumer);
-        workerManager.findJobWorkerConfigByType("user.find").ifPresent(consumer);
-        workerManager.findJobWorkerConfigByType("user.calculateSalary").ifPresent(consumer);
 
         // Создаем ResultCaptor для каждого worker'a
         ResultCaptor<Map<String, User>> resultFind = new ResultCaptor<>();
@@ -169,8 +164,6 @@ class CamundaExampleApplicationTests {
         Mockito.verify(worker).calculateSalary(any(User.class));
         Mockito.verify(worker).logUser(any(User.class));
         Mockito.verify(worker).findUser(id);
-
-        workerManager.closeAllOpenWorkers();
     }
 
     /**
