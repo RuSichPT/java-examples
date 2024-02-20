@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+  sql:
+    init:
+      mode: always

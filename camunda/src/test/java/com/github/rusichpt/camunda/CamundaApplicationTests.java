@@ -5,7 +5,6 @@ import com.github.rusichpt.camunda.dto.User;
 import com.github.rusichpt.camunda.repo.UserRepository;
 import com.github.rusichpt.camunda.worker.UserWorker;
 import io.camunda.zeebe.client.ZeebeClient;
-import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import io.camunda.zeebe.spring.client.annotation.value.ZeebeWorkerValue;
 import io.camunda.zeebe.spring.client.bean.MethodInfo;
 import io.camunda.zeebe.spring.client.jobhandling.JobWorkerManager;
@@ -35,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.github.rusichpt.camunda.CamundaExampleApplicationTests.Configuration;
+import static com.github.rusichpt.camunda.CamundaApplicationTests.Configuration;
 import static com.github.rusichpt.camunda.common.ZeebeClientUtils.createProcess;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -47,7 +46,7 @@ import static org.mockito.Mockito.doAnswer;
 )
 @Testcontainers
 @Slf4j
-class CamundaExampleApplicationTests {
+class CamundaApplicationTests {
 
     @Autowired
     private ZeebeClient client;
@@ -88,7 +87,7 @@ class CamundaExampleApplicationTests {
         User expected = repo.findById(id).orElseThrow();
 
         // Создать экземпляр процесса, начиная с шага Activity_19hjktg"
-        ProcessInstanceEvent event = createProcess(client, "user-process", "Activity_19hjktg", vars);
+        createProcess(client, "user-process", "Activity_19hjktg", vars);
 
         Optional<ZeebeWorkerValue> opt1 = workerManager.findJobWorkerConfigByType("user.log");
         Optional<ZeebeWorkerValue> opt2 = workerManager.findJobWorkerConfigByType("user.find");
@@ -118,7 +117,7 @@ class CamundaExampleApplicationTests {
         Map<String, Object> vars = Map.of("id", id);
 
         // Создать экземпляр процесса, начиная с шага Activity_19hjktg"
-        ProcessInstanceEvent event = createProcess(client, "user-process", "Activity_19hjktg", vars);
+        createProcess(client, "user-process", "Activity_19hjktg", vars);
 
         // ожидаем завершения работы worker'ов
         Awaitility.await()
@@ -147,7 +146,7 @@ class CamundaExampleApplicationTests {
         doAnswer(resultLog).when(worker).logUser(any(User.class));
 
         // Создать экземпляр процесса, начиная с шага Activity_19hjktg"
-        ProcessInstanceEvent event = createProcess(client, "user-process", "Activity_19hjktg", vars);
+        createProcess(client, "user-process", "Activity_19hjktg", vars);
 
         // Ожидаем завершения работы worker'ов
         Awaitility.await()
