@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Deployment(resources = "classpath:bpmn/user.bpmn")
-public class CamundaExampleApplication {
+public class CamundaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CamundaExampleApplication.class, args);
+        SpringApplication.run(CamundaApplication.class, args);
     }
 
 }
