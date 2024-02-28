@@ -1,0 +1,16 @@
+spring:
+  docker:
+    compose:
+      file: "./docker/postgres/docker-compose.yaml"
+      profiles:
+        active: pg_14
+      stop:
+        command: down
+  jpa:
+    defer-datasource-initialization: true # https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+  sql:
+    init:
+      mode: always

@@ -12,6 +12,7 @@
     <modules>
         <module>camunda</module>
         <module>data</module>
+        <module>docker-compose</module>
     </modules>
 
 
