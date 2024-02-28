@@ -67,7 +67,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    @DisplayName("Должен корректно обновить сущность")
+    @DisplayName("Должен корректно удалить сущность")
     void test3() {
         User user = repo.findById(1L).orElseThrow();
         user.setName("Антон");

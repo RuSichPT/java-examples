@@ -1,0 +1,5 @@
+# Zeebe
+zeebe.client:
+  broker.gateway-address:
+  security.plaintext: true
+  enabled: true

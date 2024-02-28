@@ -13,9 +13,21 @@ public class TestDataApplication {
         SpringApplication.from(DataApplication::main).with(TestDataApplication.class).run(args);
     }
 
-    @Bean
+    @Bean(initMethod = "start", destroyMethod = "stop")
     @ServiceConnection
     public PostgreSQLContainer<?> postgreSQLContainer() {
         return new PostgreSQLContainer<>("postgres:14.1");
     }
+
+    // Без     @ServiceConnection
+//    @Bean
+//    public DataSource dataSource(PostgreSQLContainer<?> postgreSQLContainer) {
+//        HikariDataSource hikariDataSource = new HikariDataSource();
+//        hikariDataSource.setJdbcUrl(postgreSQLContainer.getJdbcUrl());
+//        hikariDataSource.setUsername(postgreSQLContainer.getUsername());
+//        hikariDataSource.setPassword(postgreSQLContainer.getPassword());
+//
+//        return hikariDataSource;
+//    }
+
 }
