@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
@@ -45,5 +46,6 @@ public class ConfigProperties {
     /**
      * Object Credentials
      */
+    @NestedConfigurationProperty
     private Credentials credentials;
 }
