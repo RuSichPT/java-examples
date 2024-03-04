@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping()
+@RequestMapping
 @RequiredArgsConstructor
 public class UserController {
 
@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/users")
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         return userService.getUsers();
     }
 
