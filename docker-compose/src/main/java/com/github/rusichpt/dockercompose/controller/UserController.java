@@ -1,8 +1,8 @@
 package com.github.rusichpt.dockercompose.controller;
 
 
-import com.github.rusichpt.dockercompose.entity.User;
-import com.github.rusichpt.dockercompose.service.UserService;
+import com.github.rusichpt.data.entity.User;
+import com.github.rusichpt.data.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
