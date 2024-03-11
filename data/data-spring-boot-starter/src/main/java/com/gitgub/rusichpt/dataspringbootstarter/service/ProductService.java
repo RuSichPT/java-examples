@@ -1,6 +1,6 @@
-package com.github.rusichpt.data.service;
+package com.gitgub.rusichpt.dataspringbootstarter.service;
 
-import com.github.rusichpt.data.entity.Product;
+import com.gitgub.rusichpt.dataspringbootstarter.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

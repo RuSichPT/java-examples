@@ -1,7 +1,7 @@
-package com.github.rusichpt.data.service;
+package com.gitgub.rusichpt.dataspringbootstarter.service;
 
-import com.github.rusichpt.data.entity.Product;
-import com.github.rusichpt.data.repo.ProductRepository;
+import com.gitgub.rusichpt.dataspringbootstarter.entity.Product;
+import com.gitgub.rusichpt.dataspringbootstarter.repo.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

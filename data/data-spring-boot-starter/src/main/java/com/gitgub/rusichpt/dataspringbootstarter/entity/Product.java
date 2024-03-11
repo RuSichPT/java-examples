@@ -1,4 +1,4 @@
-package com.github.rusichpt.data.entity;
+package com.gitgub.rusichpt.dataspringbootstarter.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,16 +7,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "products")
 @Data
-@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+
     private String name;
-    private int age;
-    private String about;
+
+    private double price;
 }

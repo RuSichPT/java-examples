@@ -1,6 +1,6 @@
-package com.github.rusichpt.data.repo;
+package com.gitgub.rusichpt.dataspringbootstarter.repo;
 
-import com.github.rusichpt.data.entity.Product;
+import com.gitgub.rusichpt.dataspringbootstarter.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

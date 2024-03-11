@@ -17,7 +17,7 @@
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>lib</module>
+        <module>data-spring-boot-starter</module>
         <module>app</module>
     </modules>
 
@@ -30,22 +30,10 @@
         <dependencies>
             <dependency>
                 <groupId>com.gitgub.rusichpt</groupId>
-                <artifactId>lib</artifactId>
+                <artifactId>data-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${openapi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
 </project>

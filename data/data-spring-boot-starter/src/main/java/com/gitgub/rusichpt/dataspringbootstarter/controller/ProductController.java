@@ -1,17 +1,16 @@
-package com.github.rusichpt.data.controller;
+package com.gitgub.rusichpt.dataspringbootstarter.controller;
 
-import com.github.rusichpt.data.entity.Product;
-import com.github.rusichpt.data.service.ProductService;
+
+import com.gitgub.rusichpt.dataspringbootstarter.entity.Product;
+import com.gitgub.rusichpt.dataspringbootstarter.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping
 @RequiredArgsConstructor
 public class ProductController {
 

@@ -1,7 +1,7 @@
-package com.github.rusichpt.data.service;
+package com.gitgub.rusichpt.dataspringbootstarter.service;
 
 
-import com.github.rusichpt.data.entity.User;
+import com.gitgub.rusichpt.dataspringbootstarter.entity.User;
 
 import java.util.List;
 import java.util.Optional;
