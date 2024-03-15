@@ -1,7 +1,8 @@
 package com.gitgub.rusichpt.dataspringbootstarter.controller;
 
 
-import com.gitgub.rusichpt.dataspringbootstarter.entity.Product;
+import com.gitgub.rusichpt.dataspringbootstarter.dto.ProductDTO;
+import com.gitgub.rusichpt.dataspringbootstarter.mapper.ProductMapper;
 import com.gitgub.rusichpt.dataspringbootstarter.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +16,17 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductMapper mapper;
 
     @GetMapping(path = "/products")
-    public List<Product> getAllProducts() {
-        return productService.getProducts();
+    public List<ProductDTO> getAllProducts() {
+        return productService.getProducts().stream()
+                .map(mapper::toProductDTO)
+                .toList();
     }
 
     @GetMapping(path = "/products/{id}")
-    public Product getProduct(@PathVariable Long id) {
-        return productService.getProduct(id).orElse(null);
+    public ProductDTO getProduct(@PathVariable Long id) {
+        return mapper.toProductDTO(productService.getProduct(id).orElse(null));
     }
 }

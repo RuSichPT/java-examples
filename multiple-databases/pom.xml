@@ -41,7 +41,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.gitgub.rusichpt</groupId>
-			<artifactId>lib</artifactId>
+			<artifactId>data-spring-boot-starter</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

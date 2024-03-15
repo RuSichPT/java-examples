@@ -2,7 +2,8 @@ package com.gitgub.rusichpt.dataspringbootstarter.controller;
 
 
 import com.gitgub.rusichpt.dataspringbootstarter.autoconfigure.DataProperties;
-import com.gitgub.rusichpt.dataspringbootstarter.entity.User;
+import com.gitgub.rusichpt.dataspringbootstarter.dto.UserDTO;
+import com.gitgub.rusichpt.dataspringbootstarter.mapper.UserMapper;
 import com.gitgub.rusichpt.dataspringbootstarter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class UserController {
 
     private final UserService userService;
     private final DataProperties properties;
+    private final UserMapper mapper;
 
     @GetMapping
     public String hello() {
@@ -25,12 +27,14 @@ public class UserController {
     }
 
     @GetMapping(path = "/users")
-    public List<User> getAllUsers() {
-        return userService.getUsers();
+    public List<UserDTO> getAllUsers() {
+        return userService.getUsers().stream()
+                .map(mapper::toUserDTO)
+                .toList();
     }
 
     @GetMapping(path = "/users/{id}")
-    public User getUser(@PathVariable Long id) {
-        return userService.getUser(id).orElse(null);
+    public UserDTO getUser(@PathVariable Long id) {
+        return mapper.toUserDTO(userService.getUser(id).orElse(null));
     }
 }
