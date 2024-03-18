@@ -12,7 +12,6 @@
     <modules>
         <module>camunda</module>
         <module>data</module>
-        <module>docker-compose</module>
         <module>config-properties</module>
         <module>multiple-databases</module>
     </modules>

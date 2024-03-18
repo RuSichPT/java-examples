@@ -17,5 +17,8 @@ https://struchkov.dev/blog/ru/create-spring-boot-starter/ Spring Boot (3.x.x)
 ### Quick Guide to MapStruct
 https://www.baeldung.com/mapstruct
 
+### Multi-Module Project With Spring Boot
+https://www.baeldung.com/spring-boot-multiple-modules
+
 ### Open API
 http://localhost:8080/swagger-ui/index.html

@@ -13,6 +13,9 @@
     <artifactId>app</artifactId>
     <packaging>jar</packaging>
 
+    <name>app</name>
+    <description>Demo project for Spring Boot</description>
+
     <dependencies>
         <dependency>
             <groupId>com.gitgub.rusichpt</groupId>
