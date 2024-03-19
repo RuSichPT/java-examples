@@ -1,10 +1,14 @@
 package com.github.rusichpt.data.repo;
 
+import com.gitgub.rusichpt.dataspringbootstarter.autoconfigure.DataAutoConfiguration;
+import com.gitgub.rusichpt.dataspringbootstarter.autoconfigure.DataProperties;
 import com.gitgub.rusichpt.dataspringbootstarter.entity.User;
 import com.gitgub.rusichpt.dataspringbootstarter.repo.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -21,6 +25,8 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 
 @Testcontainers
 @DataJpaTest
+@ImportAutoConfiguration(classes = DataAutoConfiguration.class)
+@EnableConfigurationProperties(DataProperties.class)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 class UserRepositoryTest {
     @Autowired
