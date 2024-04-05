@@ -14,6 +14,7 @@
         <module>data</module>
         <module>config-properties</module>
         <module>multiple-databases</module>
+        <module>reactor-core</module>
     </modules>
 
 

@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.github.rusichpt.camunda.CamundaApplicationTests.Configuration;
+import static com.github.rusichpt.camunda.CamundaApplicationTest.Configuration;
 import static com.github.rusichpt.camunda.common.ZeebeClientUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,7 +54,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Testcontainers
 @Slf4j
 @AutoConfigureMockMvc
-class CamundaApplicationTests {
+class CamundaApplicationTest {
     @Autowired
     MockMvc mvc;
     @Autowired
