@@ -15,6 +15,7 @@
         <module>config-properties</module>
         <module>multiple-databases</module>
         <module>reactor-core</module>
+        <module>generics</module>
     </modules>
 
 
