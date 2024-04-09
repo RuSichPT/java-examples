@@ -16,6 +16,7 @@
         <module>multiple-databases</module>
         <module>reactor-core</module>
         <module>generics</module>
+        <module>spring-cloud-config</module>
     </modules>
 
 
