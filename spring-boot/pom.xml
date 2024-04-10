@@ -19,6 +19,7 @@
     </properties>
 
     <modules>
+        <module>config-properties</module>
         <module>spring-cloud-config</module>
         <module>data</module>
     </modules>
