@@ -1,6 +1,7 @@
 package com.github.rusichpt;
 
 import lombok.extern.slf4j.Slf4j;
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -81,6 +82,7 @@ class MainTest {
 
         assertThat(elements).containsExactly(1, 2);
     }
+
     @Test
     void test4() {
         List<Integer> elements = new ArrayList<>();
@@ -106,10 +108,12 @@ class MainTest {
                     }
 
                     @Override
-                    public void onError(Throwable t) {}
+                    public void onError(Throwable t) {
+                    }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
                 });
 
         assertThat(elements).containsExactly(1, 2, 3, 4);
@@ -150,15 +154,15 @@ class MainTest {
     @Test
     void test7() {
         ConnectableFlux<Object> publish = Flux.create(fluxSink -> {
-                    while(true) {
+                    while (true) {
                         fluxSink.next(System.currentTimeMillis());
                     }
                 })
                 .sample(Duration.ofSeconds(2))
                 .publish();
 
-        publish.subscribe(o-> System.out.println(o + " consumer1"));
-        publish.subscribe(o-> System.out.println(o + " consumer2"));
+        publish.subscribe(o -> System.out.println(o + " consumer1"));
+        publish.subscribe(o -> System.out.println(o + " consumer2"));
 
 //        publish.connect();
     }
@@ -172,6 +176,9 @@ class MainTest {
                 .map(i -> i * 2)
                 .subscribeOn(Schedulers.parallel())
                 .subscribe(elements::add);
+
+        Awaitility.await()
+                .atMost(Duration.ofMillis(200));
 
         assertThat(elements).containsExactly(2, 4, 6, 8);
     }
