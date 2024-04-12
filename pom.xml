@@ -15,6 +15,7 @@
         <module>reactor-core</module>
         <module>generics</module>
         <module>spring-boot</module>
+        <module>jca</module>
     </modules>
 
     <properties>
