@@ -22,6 +22,7 @@
         <module>config-properties</module>
         <module>spring-cloud-config</module>
         <module>data</module>
+        <module>jdbc</module>
     </modules>
 
     <dependencyManagement>

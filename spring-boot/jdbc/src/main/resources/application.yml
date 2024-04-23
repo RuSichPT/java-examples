@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: jdbc
+  docker:
+    compose:
+      enabled: true
+      file: "./docker/mysql/docker-compose.yaml"
+      stop:
+        command: down
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/mydatabase
+#    username: myuser
+#    password: secret
+  sql:
+    init:
+      mode: always
