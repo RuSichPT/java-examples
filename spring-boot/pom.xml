@@ -15,7 +15,7 @@
     <description>Demo projects for Spring Boot</description>
 
     <properties>
-        <spring-boot.version>3.2.4</spring-boot.version>
+        <spring-boot.version>3.2.5</spring-boot.version>
     </properties>
 
     <modules>
@@ -23,6 +23,7 @@
         <module>spring-cloud-config</module>
         <module>data</module>
         <module>jdbc</module>
+        <module>filter</module>
     </modules>
 
     <dependencyManagement>
