@@ -24,6 +24,7 @@
         <module>data</module>
         <module>jdbc</module>
         <module>filter</module>
+        <module>web-flux</module>
     </modules>
 
     <dependencyManagement>
