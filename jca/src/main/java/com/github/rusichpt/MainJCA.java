@@ -2,14 +2,12 @@ package com.github.rusichpt;
 
 import jakarta.xml.bind.DatatypeConverter;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.IvParameterSpec;
 import java.security.*;
 
-@Slf4j
 public class MainJCA {
     public static void main(String[] args) {
         showProviders();
