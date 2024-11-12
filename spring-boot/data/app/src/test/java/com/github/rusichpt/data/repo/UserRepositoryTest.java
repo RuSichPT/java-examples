@@ -1,9 +1,9 @@
 package com.github.rusichpt.data.repo;
 
-import com.gitgub.rusichpt.dataspringbootstarter.autoconfigure.DataAutoConfiguration;
-import com.gitgub.rusichpt.dataspringbootstarter.autoconfigure.DataProperties;
-import com.gitgub.rusichpt.dataspringbootstarter.entity.User;
-import com.gitgub.rusichpt.dataspringbootstarter.repo.UserRepository;
+import com.github.rusichpt.dataspringbootstarter.autoconfigure.DataAutoConfiguration;
+import com.github.rusichpt.dataspringbootstarter.autoconfigure.DataProperties;
+import com.github.rusichpt.dataspringbootstarter.entity.User;
+import com.github.rusichpt.dataspringbootstarter.repo.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
