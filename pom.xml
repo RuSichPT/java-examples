@@ -17,6 +17,7 @@
         <module>spring-boot</module>
         <module>jca</module>
         <module>cxf</module>
+        <module>multithreading</module>
     </modules>
 
     <properties>
