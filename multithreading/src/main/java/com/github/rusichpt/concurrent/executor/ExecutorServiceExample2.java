@@ -1,4 +1,4 @@
-package com.github.rusichpt.executor;
+package com.github.rusichpt.concurrent.executor;
 
 import java.util.concurrent.*;
 

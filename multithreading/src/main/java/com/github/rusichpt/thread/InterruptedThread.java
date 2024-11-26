@@ -6,33 +6,47 @@ import java.util.stream.IntStream;
 
 public class InterruptedThread extends Thread {
     @Override
-    @SneakyThrows
     public void run() {
-        while (!this.isInterrupted()) {
-            System.out.println("work");
-            for (long i = 0; i < 100_000_000L; i++) {
-
+        while (!Thread.currentThread().isInterrupted()) {
+            System.out.println("Thread is working...");
+            try {
+                Thread.sleep(500); // Симуляция работы
+            } catch (InterruptedException e) {
+                // Поток прерывается во время sleep, нужно завершить работу
+                System.out.println("Thread interrupted during sleep, stopping...");
+                break;
             }
         }
+        System.out.println("Thread stopped.");
     }
 
     @SneakyThrows
     public static void main(String[] args) {
+        // Создаем поток, который проверяет флаг прерывания
         Thread interruptedThread = new InterruptedThread();
 
-        interruptedThread.start();
-        Thread.sleep(200);
-        interruptedThread.interrupt();
+        interruptedThread.start(); // Запускаем поток
 
+        Thread.sleep(2000); // Основной поток ждёт 2 секунды
+        System.out.println("Main: Requesting thread to stop...");
+        interruptedThread.interrupt(); // Прерываем поток
+        interruptedThread.join(); // Ждем завершения потока
+        System.out.println("Main: Thread has stopped.");
+
+        System.out.println("/////////////////////////////////////////");
+        /////////////////////////////////////////
         // Если код не обрабатывает прерывания (isInterrupted()), бесполезно использовать метод interrupt
         // Ни один класс Stream API не проверяет флажок прерывания
         Thread t = new Thread(() -> {
-            IntStream.range(0, 1000).boxed().forEach(
+            IntStream.range(0, 10).boxed().forEach(
                     System.out::println
             );
         });
 
-        t.start();
-        t.interrupt();
+        t.start(); // Запускаем поток
+        System.out.println("Main: Requesting thread to stop...");
+        t.interrupt(); // Ждем завершения потока
+        t.join(); // Ждем завершения потока
+        System.out.println("Main: Thread has stopped.");
     }
 }

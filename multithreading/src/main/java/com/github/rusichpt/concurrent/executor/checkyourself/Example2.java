@@ -1,4 +1,4 @@
-package com.github.rusichpt.executor.checkyourself;
+package com.github.rusichpt.concurrent.executor.checkyourself;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
