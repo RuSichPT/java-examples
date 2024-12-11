@@ -1,8 +1,6 @@
 # Spring JDBC
 
-### Spring JDBC
-
-https://www.baeldung.com/spring-jdbc-jdbctemplate
+### [Spring JDBC](https://www.baeldung.com/spring-jdbc-jdbctemplate)
 
 ### MySQL
 
