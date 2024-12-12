@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: producer
+rmq:
+  connection-name: ${spring.application.name}
+  uri: amqp://guest:guest@localhost:5672
+  exchange: CommandExchangeTest
+  routingKey: consumer.message
+  queue: Command_${rmq.routingKey}

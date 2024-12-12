@@ -25,6 +25,7 @@
         <module>jdbc</module>
         <module>filter</module>
         <module>web-flux</module>
+        <module>reactor-rabbitmq</module>
     </modules>
 
     <dependencyManagement>

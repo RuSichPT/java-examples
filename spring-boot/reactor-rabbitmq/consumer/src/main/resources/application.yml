@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: consumer
+rmq:
+  connection-name: ${spring.application.name}
+  uri: amqp://guest:guest@localhost:5672
+  exchange: CommandExchangeTest
+  routingKey: consumer
+server:
+  port: 8081
