@@ -11,9 +11,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ConfigurationPropertiesScan
 @Slf4j
-@ComponentScan(basePackages = "com.gitgub.rusichpt.dataspringbootstarter")
-@EnableJpaRepositories(basePackages = "com.gitgub.rusichpt.dataspringbootstarter")
-@EntityScan(basePackages = "com.gitgub.rusichpt.dataspringbootstarter")
+@ComponentScan(basePackages = "com.github.rusichpt.dataspringbootstarter")
+@EnableJpaRepositories(basePackages = "com.github.rusichpt.dataspringbootstarter")
+@EntityScan(basePackages = "com.github.rusichpt.dataspringbootstarter")
 public class DataAutoConfiguration {
 
     @PostConstruct
