@@ -18,6 +18,7 @@
         <module>jca</module>
         <module>cxf</module>
         <module>multithreading</module>
+        <module>lombok</module>
     </modules>
 
     <properties>
