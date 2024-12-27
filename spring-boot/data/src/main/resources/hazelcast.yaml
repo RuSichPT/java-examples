@@ -1,0 +1,13 @@
+hazelcast:
+  cluster-name: data
+  network:
+    join:
+      multicast:
+        enabled: false
+  map:
+    userMap:
+      time-to-live-seconds: 600
+      max-idle-seconds: 300
+
+
+

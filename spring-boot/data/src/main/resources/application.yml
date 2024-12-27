@@ -1,11 +1,11 @@
 spring:
   docker:
     compose:
-      enabled: false
-  datasource:
-    url: jdbc:postgresql://localhost:5432/db-test
-    username: sa
-    password: sa
+      file: "./docker/postgres/docker-compose.yaml"
+      profiles:
+        active: pg_14
+      stop:
+        command: down
   jpa:
     defer-datasource-initialization: true # https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
     show-sql: false
@@ -14,3 +14,5 @@ spring:
   sql:
     init:
       mode: always
+  hazelcast:
+    config: classpath:hazelcast.yaml

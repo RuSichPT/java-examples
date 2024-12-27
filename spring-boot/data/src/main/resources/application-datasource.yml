@@ -1,0 +1,27 @@
+spring:
+  docker:
+    compose:
+      enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db-test
+    username: sa
+    password: sa
+  jpa:
+    defer-datasource-initialization: true # https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+  sql:
+    init:
+      mode: always
+
+hazelcast:
+  cluster-name: dev
+  network-config:
+    join:
+      multicast-config:
+        enabled: false
+  mapConfigs:
+    userMap:
+      timeToLiveSeconds: 43200
+      maxIdleSeconds: 3600
