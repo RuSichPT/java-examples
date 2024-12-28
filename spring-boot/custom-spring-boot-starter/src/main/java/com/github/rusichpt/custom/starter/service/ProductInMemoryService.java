@@ -16,6 +16,11 @@ public class ProductInMemoryService implements ProductService {
     private final ProductInMemoryRepository repo;
 
     @Override
+    public Product saveProduct(Product product) {
+        return repo.save(product);
+    }
+
+    @Override
     public Optional<Product> getProduct(Long id) {
         return repo.findById(id);
     }

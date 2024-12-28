@@ -12,10 +12,15 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@ConditionalOnMissingBean(ProductService.class)
-public class UserInMemortService implements UserService {
+@ConditionalOnMissingBean(UserService.class)
+public class UserInMemoryService implements UserService {
 
     private final UserInMemoryRepository repo;
+
+    @Override
+    public User saveUser(User user) {
+        return repo.save(user);
+    }
 
     @Override
     public Optional<User> getUser(Long id) {

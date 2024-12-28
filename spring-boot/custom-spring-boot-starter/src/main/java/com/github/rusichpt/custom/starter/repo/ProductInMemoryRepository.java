@@ -31,4 +31,9 @@ public class ProductInMemoryRepository {
     public List<Product> findAll() {
         return products;
     }
+
+    public Product save(Product product) {
+        products.add(product);
+        return product;
+    }
 }

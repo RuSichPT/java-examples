@@ -2,6 +2,7 @@ package com.github.rusichpt.data.service;
 
 import com.github.rusichpt.custom.starter.model.Product;
 import com.github.rusichpt.custom.starter.service.ProductService;
+import com.github.rusichpt.data.entity.ProductEntity;
 import com.github.rusichpt.data.repo.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository repo;
+
+    @Override
+    public Product saveProduct(Product product) {
+        ProductEntity entity = repo.save(new ProductEntity(null, product.getName(), product.getPrice()));
+        return new Product(entity.getId(), entity.getName(), entity.getPrice());
+    }
 
     @Override
     public Optional<Product> getProduct(Long id) {
