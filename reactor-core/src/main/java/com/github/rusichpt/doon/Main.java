@@ -13,8 +13,8 @@ public class Main {
                         throw new RuntimeException("Ошибка");
                     return i;
                 })
-                .doOnError(error -> System.err.println("Произошла ошибка: " + error.getMessage()))
                 .doOnComplete(() -> System.out.println("Поток завершен")) // Вызывается, когда поток успешно завершился.
+                .doOnError(error -> System.err.println("Произошла ошибка: " + error.getMessage()))
                 .doOnTerminate(() -> System.out.println("Поток завершился (успешно или с ошибкой)"))
                 .doOnRequest(request -> System.out.println("Запрошено элементов: " + request))
                 .doFinally(signalType -> System.out.println("Поток завершился: " + signalType)) // Вызывается в самом конце, независимо от результата выполнения (onComplete, onError, onCancel).

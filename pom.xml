@@ -12,13 +12,13 @@
     <modules>
         <module>camunda</module>
         <module>reactor-core</module>
-        <module>generics</module>
         <module>spring-boot</module>
         <module>jca</module>
         <module>cxf</module>
         <module>multithreading</module>
         <module>lombok</module>
         <module>hazelcast</module>
+        <module>core</module>
     </modules>
 
     <properties>
