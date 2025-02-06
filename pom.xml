@@ -19,6 +19,7 @@
         <module>lombok</module>
         <module>hazelcast</module>
         <module>core</module>
+        <module>core/references</module>
     </modules>
 
     <properties>
