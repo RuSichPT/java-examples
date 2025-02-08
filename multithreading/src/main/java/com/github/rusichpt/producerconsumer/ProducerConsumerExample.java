@@ -1,4 +1,4 @@
-package com.github.rusichpt.problem;
+package com.github.rusichpt.producerconsumer;
 
 import java.util.LinkedList;
 import java.util.Queue;
