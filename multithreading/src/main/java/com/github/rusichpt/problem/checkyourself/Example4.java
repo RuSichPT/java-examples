@@ -1,9 +1,9 @@
 package com.github.rusichpt.problem.checkyourself;
 
 public class Example4 {
-    public static abstract class AbstractParent {
+    public abstract static class AbstractParent {
 
-        public synchronized void runParent() {
+        public static synchronized void runParent() { // static
             System.out.println("Parent start");
             try {
                 Thread.sleep(2000);
@@ -16,7 +16,7 @@ public class Example4 {
 
     public static class Child extends AbstractParent {
 
-        public synchronized void runChild() {
+        public static synchronized void runChild() { // static
             System.out.println("Child start");
             try {
                 Thread.sleep(2000);
@@ -31,8 +31,8 @@ public class Example4 {
 
         Child child = new Child();
 
-        new Thread(child::runChild).start();
-        new Thread(child::runParent).start();
+        new Thread(Child::runChild).start();
+        new Thread(Child::runParent).start();
 
         // Child start Parent start Parent end Child end
         // Parent start Child start Parent end Child end

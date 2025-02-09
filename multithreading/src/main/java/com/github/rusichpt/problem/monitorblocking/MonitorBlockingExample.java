@@ -33,7 +33,7 @@ public class MonitorBlockingExample {
         Thread.sleep(100); // Даем thread2 время попробовать захватить монитор
 
         System.out.println("Main: Interrupting Thread 2");
-        thread2.interrupt(); // Прерываем thread2
+        thread2.interrupt(); // Прерываем thread2 (не можем прервать состояние BLOCKING)
 
         thread1.join();
         thread2.join();

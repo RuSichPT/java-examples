@@ -1,7 +1,7 @@
 package com.github.rusichpt.problem.checkyourself;
 
 public class Example3 {
-    public static abstract class AbstractParent {
+    public abstract static class AbstractParent {
 
         public synchronized void runParent() {
             System.out.println("Parent start");

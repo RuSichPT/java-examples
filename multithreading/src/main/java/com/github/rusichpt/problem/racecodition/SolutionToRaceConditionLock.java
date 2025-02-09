@@ -28,7 +28,7 @@ public class SolutionToRaceConditionLock {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        SolutionToRaceConditionSynchronized.Counter counter = new SolutionToRaceConditionSynchronized.Counter();
+        Counter counter = new Counter();
 
         Thread thread1 = new Thread(() -> {
             for (int i = 0; i < 10000; i++) {
