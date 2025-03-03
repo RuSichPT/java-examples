@@ -1,7 +1,7 @@
 package com.github.rusichpt.custom.starter.mapper;
 
 import com.github.rusichpt.custom.starter.dto.ProductDTO;
-import com.github.rusichpt.custom.starter.model.Product;
+import com.github.rusichpt.custom.starter.entity.Product;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

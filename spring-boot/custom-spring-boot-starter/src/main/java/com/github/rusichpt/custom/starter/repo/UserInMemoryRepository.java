@@ -1,16 +1,11 @@
 package com.github.rusichpt.custom.starter.repo;
 
-import com.github.rusichpt.custom.starter.model.User;
-import com.github.rusichpt.custom.starter.service.UserInMemoryService;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.stereotype.Repository;
+import com.github.rusichpt.custom.starter.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-@ConditionalOnBean(UserInMemoryService.class)
 public class UserInMemoryRepository {
     private final List<User> users = new ArrayList<>();
 

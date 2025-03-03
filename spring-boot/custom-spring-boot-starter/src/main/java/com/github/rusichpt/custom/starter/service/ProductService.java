@@ -1,6 +1,6 @@
 package com.github.rusichpt.custom.starter.service;
 
-import com.github.rusichpt.custom.starter.model.Product;
+import com.github.rusichpt.custom.starter.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

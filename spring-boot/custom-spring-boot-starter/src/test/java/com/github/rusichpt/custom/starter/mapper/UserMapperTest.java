@@ -1,7 +1,7 @@
 package com.github.rusichpt.custom.starter.mapper;
 
 import com.github.rusichpt.custom.starter.dto.UserDTO;
-import com.github.rusichpt.custom.starter.model.User;
+import com.github.rusichpt.custom.starter.entity.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;

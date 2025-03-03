@@ -1,4 +1,4 @@
-package com.github.rusichpt.custom.starter.model;
+package com.github.rusichpt.custom.starter.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +11,8 @@ import lombok.experimental.FieldNameConstants;
 @NoArgsConstructor
 @Builder
 @FieldNameConstants
-public class User {
+public class Product {
     private Long id;
     private String name;
-    private int age;
-    private String about;
+    private double price;
 }

@@ -1,6 +1,6 @@
 package com.github.rusichpt.data.service;
 
-import com.github.rusichpt.custom.starter.model.Product;
+import com.github.rusichpt.custom.starter.entity.Product;
 import com.github.rusichpt.custom.starter.service.ProductService;
 import com.github.rusichpt.data.entity.ProductEntity;
 import com.github.rusichpt.data.repo.ProductRepository;

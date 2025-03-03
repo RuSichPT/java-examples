@@ -1,6 +1,6 @@
 package com.github.rusichpt.data.service;
 
-import com.github.rusichpt.custom.starter.model.User;
+import com.github.rusichpt.custom.starter.entity.User;
 import com.github.rusichpt.custom.starter.service.UserService;
 import com.github.rusichpt.data.entity.UserEntity;
 import com.github.rusichpt.data.repo.UserRepository;

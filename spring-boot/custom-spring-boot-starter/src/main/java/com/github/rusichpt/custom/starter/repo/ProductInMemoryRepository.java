@@ -1,17 +1,12 @@
 package com.github.rusichpt.custom.starter.repo;
 
-import com.github.rusichpt.custom.starter.model.Product;
-import com.github.rusichpt.custom.starter.service.ProductInMemoryService;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.stereotype.Repository;
+import com.github.rusichpt.custom.starter.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Repository
-@ConditionalOnBean(ProductInMemoryService.class)
 public class ProductInMemoryRepository {
     private final List<Product> products = new ArrayList<>();
 
