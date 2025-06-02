@@ -1,0 +1,18 @@
+version: '3'
+services:
+  oracle-db:
+    image: gvenzl/oracle-xe:slim
+    container_name: oracle-db
+    ports:
+      - 1521:1521
+    environment:
+#      ORACLE_DATABASE: XEPDB1
+      ORACLE_RANDOM_PASSWORD: true
+      APP_USER: my_user
+      APP_USER_PASSWORD: my_password
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    restart: unless-stopped
+
+volumes:
+  oracle-data:
