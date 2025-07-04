@@ -1,4 +1,4 @@
-# WebFlux
+# Web Flux
 
 ### [Guide to Spring 5 WebFlux](https://www.baeldung.com/spring-webflux)
 
