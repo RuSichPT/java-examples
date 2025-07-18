@@ -31,6 +31,7 @@
         <module>custom-spring-boot-starter</module>
         <module>web</module>
         <module>jasper-reports</module>
+        <module>mapstruct</module>
     </modules>
 
     <dependencyManagement>

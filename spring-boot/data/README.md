@@ -6,14 +6,6 @@
 
 ### [Testcontainers for Java](https://java.testcontainers.org)
 
-### [Configure and Use Multiple DataSources in Spring Boot](https://www.baeldung.com/spring-boot-configure-multiple-datasources)
-
-### [Creating a Custom Starter with Spring Boot (2.x.x)](https://www.baeldung.com/spring-boot-custom-starter)
-
-### [Creating a Custom Starter with Spring Boot (3.x.x)](https://struchkov.dev/blog/ru/create-spring-boot-starter)
-
-### [Quick Guide to MapStruct](https://www.baeldung.com/mapstruct)
-
 ### [Multi-Module Project With Spring Boot](https://www.baeldung.com/spring-boot-multiple-modules)
 
 ### Open API

@@ -14,6 +14,7 @@ public class InterruptedThread extends Thread {
             } catch (InterruptedException e) {
                 // Поток прерывается во время sleep, нужно завершить работу
                 System.out.println("Thread interrupted during sleep, stopping...");
+                Thread.currentThread().interrupt();
                 break;
             }
         }
