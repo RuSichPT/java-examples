@@ -11,6 +11,7 @@
   - [Reactor RabbitMQ](spring-boot/reactor-rabbitmq/README.md)
   - [Cloud Config Server](spring-boot/spring-cloud-config/README.md)
   - [Web](spring-boot/web/README.md)
+  - [Logging](spring-boot/logging/README.md)
   - [Web Flux](spring-boot/web-flux/README.md)
 - [Camunda](camunda/README.md)
 - [Reactor-core](reactor-core/README.md) 

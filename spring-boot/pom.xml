@@ -15,7 +15,6 @@
     <description>Demo projects for Spring Boot</description>
 
     <properties>
-        <spring-boot.version>3.2.5</spring-boot.version>
         <openapi.version>2.2.0</openapi.version>
         <jasperreports.version>6.21.3</jasperreports.version>
     </properties>
@@ -32,6 +31,7 @@
         <module>web</module>
         <module>jasper-reports</module>
         <module>mapstruct</module>
+        <module>logging</module>
     </modules>
 
     <dependencyManagement>

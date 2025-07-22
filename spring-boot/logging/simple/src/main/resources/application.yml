@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: simple
+
+logging:
+  file:
+    name: spring-boot/logging/simple/logs/app.log
+#    path: spring-boot/logging/simple/logs # Можно только путь, имя будет spring.log
+  level:
+    com.github.rusichpt.simple.controller: TRACE
