@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<!--Для работы scan файл нужны менять в classpath-->
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
 
     <property name="LOGS" value="./spring-boot/logging/logback/logs"/>
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1}): %msg%n%throwable
             </Pattern>
-        </layout>
+        </encoder>
+    </appender>
+
+    <appender name="ConsoleJsonLayout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                    <!-- Для читаемости   -->
+                    <prettyPrint>true</prettyPrint>
+                </jsonFormatter>
+                <appendLineSeparator>true</appendLineSeparator>
+                <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="ConsoleJsonEncoder" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
+    </appender>
+
+    <appender name="ConsoleLogstash" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <!-- Дополнительные поля -->
+            <customFields>{"app": "my-app", "env": "dev"}</customFields>
+        </encoder>
     </appender>
 
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -17,12 +42,15 @@
             <Pattern>%d %p %C{1} [%t] %m%n</Pattern>
         </encoder>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- rollover daily and when the file reaches 10 MegaBytes -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Имя архива: по дате и номеру (если превышен размер) -->
             <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- Максимальный размер файла перед ротацией -->
+            <maxFileSize>1MB</maxFileSize>
+            <!-- Максимальное количество архивов (по умолчанию 7) -->
+            <maxHistory>30</maxHistory>
+            <!-- Общий максимальный размер всех логов (опционально) -->
+            <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
     </appender>
 
@@ -33,9 +61,21 @@
     </root>
 
     <!-- LOG "com.github.rusichpt.logback*" at TRACE level -->
-    <logger name="com.github.rusichpt.logback" level="trace" additivity="false">
+    <logger name="com.github.rusichpt.logback.controller.LogbackController" level="trace" additivity="false">
         <appender-ref ref="RollingFile"/>
         <appender-ref ref="Console"/>
+    </logger>
+
+    <logger name="com.github.rusichpt.logback.controller.JsonLayoutController" additivity="false">
+        <appender-ref ref="ConsoleJsonLayout"/>
+    </logger>
+
+    <logger name="com.github.rusichpt.logback.controller.JsonEncoderController" additivity="false">
+        <appender-ref ref="ConsoleJsonEncoder"/>
+    </logger>
+
+    <logger name="com.github.rusichpt.logback.controller.LogstashController" additivity="false">
+        <appender-ref ref="ConsoleLogstash"/>
     </logger>
 
 </configuration>
