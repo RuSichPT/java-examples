@@ -1,0 +1,57 @@
+stream_over_http_enabled: true  # Включена потоковая передача данных по HTTP
+server:
+  http_listen_port: 3200       # Порт, на котором работает Tempo
+  log_level: info              # Уровень логирования (info)
+
+query_frontend:
+  search:
+    duration_slo: 5s                     # Максимальное время выполнения поиска (SLO)
+    throughput_bytes_slo: 1.073741824e+09  # ~1 ГБ/с - лимит пропускной способности
+  trace_by_id:
+    duration_slo: 5s                     # Максимальное время поиска по ID трейса
+
+distributor:
+  receivers:                           # this configuration will listen on all ports and protocols that tempo is capable of.
+    jaeger:                            # the receives all come from the OpenTelemetry collector.  more configuration information can
+      protocols:                       # be found there: https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver
+        thrift_http:                   #
+        grpc:                          # for a production deployment you should only enable the receivers you need!
+        thrift_binary:
+        thrift_compact:
+    zipkin:
+    otlp:
+      protocols:
+        http:
+        grpc:
+    opencensus:
+
+ingester:
+  max_block_duration: 5m  # Интервал, после которого блок данных закрывается
+
+compactor:
+  compaction:
+    block_retention: 1h  # Время хранения трейсов
+
+#metrics_generator:
+#  registry:
+#    external_labels:
+#      source: tempo
+#      cluster: docker-compose
+#  storage:
+#    path: /tmp/tempo/generator/wal
+#    remote_write:
+#      - url: http://172.17.0.1:8428/api/v1/write
+#        send_exemplars: true
+
+storage:
+  trace:
+    backend: local       # Используется локальное хранилище
+    wal:
+      path: /tmp/tempo/wal  # WAL для временных данных
+    local:
+      path: /tmp/tempo/blocks  # Где хранятся блоки с трейсами
+
+#overrides:
+#  defaults:
+#    metrics_generator:
+#      processors: [service-graphs, span-metrics] # enables metrics generator

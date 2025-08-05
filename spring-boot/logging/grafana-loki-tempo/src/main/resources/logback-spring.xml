@@ -15,10 +15,20 @@
                         <pattern>app=test-app,host=${HOSTNAME},level=%level</pattern>
                     </label>
                     <message>
-                        <pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>
+                        <pattern>
+                            {
+                            "level":"%level",
+                            "class":"%logger{36}",
+                            "thread":"%thread",
+                            "message": "%message",
+                            "requestId": "%X{X-Request-ID}"
+                            }
+                        </pattern>
                     </message>
                     <sortByTime>true</sortByTime>
                 </format>
+                <batchMaxItems>10</batchMaxItems>
+                <batchTimeoutMs>1000</batchTimeoutMs>
             </appender>
 
             <root level="info">

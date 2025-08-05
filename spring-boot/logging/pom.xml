@@ -15,7 +15,7 @@
     <modules>
         <module>simple</module>
         <module>logback</module>
-        <module>grafana-loki</module>
+        <module>grafana-loki-tempo</module>
     </modules>
 
 </project>

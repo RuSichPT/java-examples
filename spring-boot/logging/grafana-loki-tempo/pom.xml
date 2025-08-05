@@ -9,7 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>grafana-loki</artifactId>
+    <artifactId>grafana-loki-tempo</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,9 +18,22 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.loki4j</groupId>
             <artifactId>loki-logback-appender</artifactId>
             <version>1.4.2</version>
+        </dependency>
+
+        <!--Затем файл можно найти в локальном кэше Maven (.m2/repository/io/opentelemetry/javaagent/opentelemetry-javaagent/2.18.1/    -->
+        <dependency>
+            <groupId>io.opentelemetry.javaagent</groupId>
+            <artifactId>opentelemetry-javaagent</artifactId>
+            <version>2.18.1</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Для различных доп фишек в logback-spring.xml  -->
