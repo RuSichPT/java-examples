@@ -21,5 +21,9 @@ OTEL_LOGS_EXPORTER=none;
 OTEL_METRICS_EXPORTER=none;  
 OTEL_SERVICE_NAME=test-app  
 
+Запуск агента 
+
+    -javaagent:./agents/opentelemetry-javaagent.jar
+
 ### Open API
 http://localhost:8080/swagger-ui/index.html
