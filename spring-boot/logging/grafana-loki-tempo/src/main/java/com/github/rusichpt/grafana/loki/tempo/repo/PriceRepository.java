@@ -2,6 +2,8 @@ package com.github.rusichpt.grafana.loki.tempo.repo;
 
 import com.github.rusichpt.grafana.loki.tempo.dto.Price;
 import com.github.rusichpt.grafana.loki.tempo.exception.PriceNotFoundException;
+import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +21,8 @@ public class PriceRepository {
         prices.put(2L, new Price(2L, 200, 3));
     }
 
-    public Price getPrice(Long productId) {
+    @WithSpan("Получение Price из репозитория")
+    public Price getPrice(@SpanAttribute("product.id") Long productId) {
         log.info("Getting Price from Price Repo With Product Id {}", productId);
         if (!prices.containsKey(productId)) {
             log.error("Price Not Found for Product Id {}", productId);

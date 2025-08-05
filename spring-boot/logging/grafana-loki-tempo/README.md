@@ -15,7 +15,7 @@
 LOKI=http://localhost:3100
 
 ## Open Telemetry
-Чтобы работала трасировка необходимо создать переменные среды для агента
+Чтобы работала трассировка необходимо создать переменные среды для агента
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318;  
 OTEL_LOGS_EXPORTER=none;  
 OTEL_METRICS_EXPORTER=none;  
