@@ -6,6 +6,8 @@
 
 ### [OpenTelemetry Setup in Spring Boot Application](https://www.baeldung.com/spring-boot-opentelemetry-setup#bd-conclusion)
 
+### [MDC Instrumentation for Logback version 1.0 and higher](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/logback/logback-mdc-1.0/library)
+
     docker compose -f ./docker/grafana-loki-tempo/docker-compose.yaml up -d 
 
 ## Loki
@@ -18,7 +20,6 @@ OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318;
 OTEL_LOGS_EXPORTER=none;  
 OTEL_METRICS_EXPORTER=none;  
 OTEL_SERVICE_NAME=test-app  
-
 
 ### Open API
 http://localhost:8080/swagger-ui/index.html

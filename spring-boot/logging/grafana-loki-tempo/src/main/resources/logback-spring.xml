@@ -12,7 +12,7 @@
                 </http>
                 <format>
                     <label>
-                        <pattern>app=test-app,host=${HOSTNAME},level=%level</pattern>
+                        <pattern>app=test-app,host=${HOSTNAME},level=%level,trace_id=%X{trace_id:-none},span_id=%X{span_id:-none}</pattern>
                     </label>
                     <message>
                         <pattern>
@@ -31,9 +31,14 @@
                 <batchTimeoutMs>1000</batchTimeoutMs>
             </appender>
 
+            <!-- Just wrap your logging appender, for example ConsoleAppender, with OpenTelemetryAppender -->
+            <appender name="OTEL" class="io.opentelemetry.instrumentation.logback.mdc.v1_0.OpenTelemetryAppender">
+                <appender-ref ref="LOKI"/>
+            </appender>
+
             <root level="info">
                 <appender-ref ref="CONSOLE"/>
-                <appender-ref ref="LOKI"/>
+                <appender-ref ref="OTEL"/>
             </root>
         </then>
         <else>
