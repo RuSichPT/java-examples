@@ -14,7 +14,6 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<openapi.version>2.2.0</openapi.version>
 		<commons-io.version>2.16.1</commons-io.version>
 	</properties>
 
@@ -37,7 +36,6 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${openapi.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -13,10 +13,6 @@
 	<name>jdbc</name>
 	<description>Demo project for Spring Boot</description>
 
-	<properties>
-		<openapi.version>2.2.0</openapi.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -41,7 +37,6 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${openapi.version}</version>
 		</dependency>
 
 		<dependency>
