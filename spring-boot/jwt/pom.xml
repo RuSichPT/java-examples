@@ -5,16 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.rusichpt</groupId>
-        <artifactId>java-examples</artifactId>
+        <artifactId>spring-boot</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>core</artifactId>
+    <artifactId>jwt</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>generics</module>
-        <module>references</module>
+        <module>nimbus</module>
     </modules>
 
 </project>

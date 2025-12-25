@@ -17,6 +17,7 @@
     <properties>
         <openapi.version>2.2.0</openapi.version>
         <jasperreports.version>6.21.3</jasperreports.version>
+        <nimbus-jose-jwt.version>10.6</nimbus-jose-jwt.version>
     </properties>
 
     <modules>
@@ -32,6 +33,7 @@
         <module>jasper-reports</module>
         <module>mapstruct</module>
         <module>logging</module>
+        <module>jwt</module>
     </modules>
 
     <dependencyManagement>
@@ -67,6 +69,11 @@
                 <groupId>net.sf.jasperreports</groupId>
                 <artifactId>jasperreports-fonts</artifactId>
                 <version>${jasperreports.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

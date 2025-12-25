@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: nimbus
+
+security:
+  keystore:
+    path: keystore.jks
+    password: mystorepass
+    our-key-alias: test
