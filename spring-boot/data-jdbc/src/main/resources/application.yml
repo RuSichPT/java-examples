@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: data-jdbc
+  datasource:
+    db1:
+      url: jdbc:postgresql://localhost:5432/db-test1
+      username: sa
+      password: sa
+    db2:
+      url: jdbc:postgresql://localhost:5433/db-test2
+      username: sa
+      password: sa
+logging:
+  level:
+    org.springframework.jdbc.core: TRACE

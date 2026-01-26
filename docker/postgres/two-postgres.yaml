@@ -5,6 +5,7 @@ services:
   postgres_1: # https://hub.docker.com/_/postgres
     image: postgres
     restart: always
+    container_name: postgres_1
     environment:
       POSTGRES_DB: db-test1
       POSTGRES_USER: sa
@@ -15,6 +16,7 @@ services:
   postgres_2: # https://hub.docker.com/_/postgres
     image: postgres
     restart: always
+    container_name: postgres_2
     environment:
       POSTGRES_DB: db-test2
       POSTGRES_USER: sa
