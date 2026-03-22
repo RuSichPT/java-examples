@@ -20,6 +20,11 @@ public class UserController {
     private final UserService userService;
     private final UserMapper mapper;
 
+    @GetMapping
+    public String hello() {
+        return "hello";
+    }
+
     @GetMapping(path = "/users")
     public List<UserDTO> getAllUsers() {
         return userService.getUsers().stream()
