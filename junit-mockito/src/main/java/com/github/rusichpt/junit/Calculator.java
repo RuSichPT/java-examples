@@ -1,4 +1,4 @@
-package com.github.rusichpt;
+package com.github.rusichpt.junit;
 
 public class Calculator {
     public int add(int a, int b) {
