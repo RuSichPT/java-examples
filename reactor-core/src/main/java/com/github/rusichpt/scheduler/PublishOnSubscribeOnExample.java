@@ -18,13 +18,17 @@ public class PublishOnSubscribeOnExample {
                     System.out.println("Sub Генерация: " + i + " в потоке " + Thread.currentThread().getName());
                     return i;
                 })
-                .subscribeOn(Schedulers.boundedElastic()) // Меняем поток для подписки на источник
+                .subscribeOn(Schedulers.boundedElastic()) // Меняем поток для подписки на источник. Не меняет Main
                 .map(i -> {
                     System.out.println("Sub Обработка: " + i + " в потоке " + Thread.currentThread().getName());
                     return i;
                 });
 
-        flux.subscribe(i -> System.out.println("Sub Получение: " + i + " в потоке " + Thread.currentThread().getName()));
+        Flux.range(1, 1)
+                .doOnNext(i -> System.out.println("Sub Main До FlatMap: " + i + " в потоке " + Thread.currentThread().getName()))
+                .flatMap(i -> flux)
+                .doOnNext(i -> System.out.println("Sub Main После FlatMap: " + i + " в потоке " + Thread.currentThread().getName()))
+                .subscribe();
     }
 
     public static void publishOn() {
